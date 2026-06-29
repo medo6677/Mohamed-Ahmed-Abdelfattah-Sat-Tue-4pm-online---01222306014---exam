@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url('../webfonts/Inter-VariableFont_opsz,wght.ttf') format('ttf');
+  src: url('../webfonts/Inter-VariableFont_opsz,wght.ttf');
   font-weight: 100 900;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
    ============================================ */
 
 :root {
-  font-size: 16px;
+
   /* Colors */
   --color-primary: #ea580c;
   --color-secondary: #c2410c;
@@ -130,7 +130,8 @@
 
   --transition-main: all .3s linear;
   /* animation */
-  --animation-main: float-item-down-anim 5s linear infinite;
+  --animation-float-down: float-item-down-anim 5s linear infinite;
+  --animation-float-up: float-item-up-anim 5s linear infinite;
 
 }
 
@@ -410,6 +411,10 @@ section header {
   color: var(--color-light);
 }
 
+.f-color-light-80 {
+  color: var(--color-light-80);
+}
+
 
 
 .f-color-dark {
@@ -421,8 +426,13 @@ section header {
   width: max-content;
 }
 
+.boxshadow {
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+}
 
-
+.bg-color-secondary {
+  background-color: var(--color-secondary);
+}
 
 .bg-gradient-tr {
   background: linear-gradient(to top right, var(--color-primary), var(--color-accent));
@@ -691,6 +701,15 @@ section header {
     --bs-navbar-brand-hover-color: var(--color-primary);
   }
 
+  .navbar-toggler {
+    --bs-border-width: none;
+
+    &:focus {
+      box-shadow: none;
+
+    }
+  }
+
   /* Animated underline */
   .nav-link {
     position: relative;
@@ -879,7 +898,7 @@ section header {
         top: -7%;
         right: -3%;
         z-index: 2;
-        animation: var(--animation-main);
+        animation: var(--animation-float-up);
 
         span {
           height: 84px;
@@ -892,7 +911,7 @@ section header {
         bottom: -7%;
         left: -3%;
         z-index: 2;
-        animation: var(--animation-main);
+        animation: var(--animation-float-down);
 
         span {
           height: 70px;
@@ -1024,6 +1043,7 @@ section header {
 
     &:hover {
       transform: translateY(-10px);
+     box-shadow: var(--badge-bg) 0px 5px 20px -20px, var(--badge-bg) 0px 10px 10px -5px;
 
       .item__icon span {
         transform: scale(1.1);
@@ -1100,13 +1120,32 @@ section header {
 /* * start client-testimonials style * */
 
 #client-testimonials {
+
+  .testimonial-card {
+    transition: var(--transition-main);
+
+
+    &:hover {
+      background: linear-gradient(to top left,
+          var(--color-light) 0%,
+          rgba(255, 255, 255, 1) 55%,
+          var(--color-light) 100%);
+
+      .testimonial-card__quote-icon>span {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+
+
   background-color: var(--color-light);
 
   .testimonial-card__quote-icon>span {
     height: 60px;
     width: 60px;
     background-color: var(--badge-bg);
-
+    transition: var(--transition-main);
   }
 
   .testimonial-card__badge {
@@ -1328,14 +1367,13 @@ section header {
     }
 
     .btn-outline-danger {
-      --bs-btn-color: var(--color-gray-500);
       --bs-btn-border-color: var(--color-gray-200);
       --bs-btn-active-bg: var(--tc-red-50);
       --bs-btn-active-color: var(--color-primary);
       --bs-btn-active-border-color: var(--color-primary);
 
       &:hover {
-        --bs-btn-color: var(--color-gray-500);
+        --bs-btn-color: var(--color-gray-900);
         --bs-btn-border-color: var(--color-gray-500);
       }
     }
@@ -1360,6 +1398,7 @@ section header {
 
 
   .contact-text {
+
     .contact__features {
       .item {
         .item__icon {
